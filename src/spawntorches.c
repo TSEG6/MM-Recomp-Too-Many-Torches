@@ -177,9 +177,20 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_20SICHITAI, { -930.0f, 35.8f, 4001.0f }, 0, 24983 },        // Deku Palace Entrance Right
     { SCENE_20SICHITAI, { 311.0f, 393.0f, 3241.0f }, 0, -6788 },        // Entrance to Woodfall
 
-    // Southern Swamp Clear (add a 2 at the end of the scene ID for cleared)
+    // Southern Swamp Clear (12 Torches)
 
-
+    { SCENE_20SICHITAI2, { -832.0f, 36.0f, -874.0f }, 0, 8476 },         // Entrance Left
+    { SCENE_20SICHITAI2, { 521.0f, 58.4f, -939.0f }, 0, -10440 },        // Entrance Right
+    { SCENE_20SICHITAI2, { 41.0f, 20.0f, -117.0f }, 0, -32340 },         // Dock Left
+    { SCENE_20SICHITAI2, { -122.0f, 20.0f, -111.0f }, 0, -32340 },       // Dock Right
+    { SCENE_20SICHITAI2, { -311.0f, 170.0f, 33.0f }, 0, 16387 },         // Tourist Center Across Scrub
+    { SCENE_20SICHITAI2, { 2089.0f, 22.0f, 244.0f }, 0, -32768 },        // Before Path to Potion Shop Right
+    { SCENE_20SICHITAI2, { 3467.0f, 15.0f, -813.0f }, 0, 25225 },        // Left Side Ladder
+    { SCENE_20SICHITAI2, { 3807.0f, 15.0f, -746.0f }, 0, 3236 },         // Right Side Ladder
+    { SCENE_20SICHITAI2, { 3982.0f, 23.0f, -1722.0f }, 0, -5835 },       // Next to Woods of Mystery
+    { SCENE_20SICHITAI2, { -767.0f, 36.0f, 4143.0f }, 0, 24983 },        // Deku Palace Entrance Left
+    { SCENE_20SICHITAI2, { -930.0f, 35.8f, 4001.0f }, 0, 24983 },        // Deku Palace Entrance Right
+    { SCENE_20SICHITAI2, { 311.0f, 393.0f, 3241.0f }, 0, -6788 },        // Entrance to Woodfall
 
     // Woods of Mystery (9 Torches)
 
@@ -255,12 +266,23 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_31MISAKI, { -5471.0f, 14.0f, 1149.0f }, 0, 0 },             // Turtle Left
     { SCENE_31MISAKI, { -5301.0f, 14.0f, 2064.0f }, 0, 17922 },         // Turtle Right
 
-    // Pirate's Fortress Exterior SCENE_KAIZOKU
+    // Pirate's Fortress Exterior (5 Torches)
+
+    { SCENE_TORIDE, { -2140.0f, 135.0f, 1862.0f }, 0, 19466 },         // Entrance Right (facing entrance)
+    { SCENE_TORIDE, { -2028.0f, 135.0f, 2257.0f }, 0, 19370 },         // Entrance Left
+    { SCENE_TORIDE, { 6.0f, 200.0f, 1572.0f }, 0, -12843 },            // Opposite Side of Barrel
+    { SCENE_TORIDE, { 290.0f, 200.0f, -686.0f }, 0, 0 },               // Opposite Side of Door (kicked out)
+    { SCENE_TORIDE, { 330.0f, 400.0f, -2285.0f }, 0, -3368 },          // Above Hookshot Target Near Interior
 
 
+    // Pirate's Fortress
 
-    // Pirate's Fortress SCENE_PIRATE
-
+    { SCENE_KAIZOKU, { 677.0f, -140.0f, -758.0f }, 0, 8140 },           // Next to Box Entrance
+    { SCENE_KAIZOKU, { 1019.0f, -160.0f, 82.0f }, 0, 0 },               // Ladder Left
+    { SCENE_KAIZOKU, { 1019.0f, -160.0f, 281.0f }, 0, 0 },              // Ladder Right
+    { SCENE_KAIZOKU, { 2039.0f, 140.0f, 436.0f }, 0, 0 },               // Stairs Middle
+    { SCENE_KAIZOKU, { 2356.0f, 280.0f, -189.0f }, 0, 0 },              // Hookshot Door Left
+    { SCENE_KAIZOKU, { 2356.0f, 280.0f, -53.0f }, 0, 0 },               // Hookshot Door Right
 
 };
 
@@ -308,9 +330,9 @@ void Torch_Draw(Actor* thisx, PlayState* play) {
 static void SpawnTorchesIfNeeded(PlayState* play) {
     u16 torchType = 8 << 10;
 
-    
     if (SwapDayNightTorches) {
-        if (gSaveContext.save.time >= CLOCK_TIME(18, 0) || gSaveContext.save.time < CLOCK_TIME(6, 0)) {
+        if (gSaveContext.save.time >= CLOCK_TIME(18, 0) ||
+            gSaveContext.save.time < CLOCK_TIME(6, 0)) {
             torchType = 10 << 10; // Night torch
         }
         else {
@@ -318,13 +340,12 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
         }
     }
 
-    
     if (IsLitTorchException(play->sceneId)) {
         if (SwapDayNightTorches) {
-            torchType = 10 << 10; 
+            torchType = 10 << 10;
         }
         else {
-            torchType = 8 << 10; 
+            torchType = 8 << 10;
         }
     }
 
@@ -354,9 +375,10 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
     }
 
     for (size_t i = 0; i < TORCH_SPAWN_COUNT; i++) {
-        if (sTorchSpawns[i].sceneId != play->sceneId) continue;
+        if (sTorchSpawns[i].sceneId != play->sceneId)
+            continue;
 
-        Actor_Spawn(
+        Actor* spawned = Actor_Spawn(
             &play->actorCtx,
             play,
             ACTOR_OBJ_SYOKUDAI,
@@ -368,6 +390,25 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
             0,
             torchType | (i & 0x3FF)
         );
+
+        if (spawned != NULL) {
+            recomp_printf(
+                "[TORCH] Spawned %s torch #%d in scene %d at (%.1f, %.1f, %.1f)\n",
+                (torchType == (10 << 10)) ? "NIGHT" : "DAY",
+                (int)i,
+                play->sceneId,
+                sTorchSpawns[i].pos.x,
+                sTorchSpawns[i].pos.y,
+                sTorchSpawns[i].pos.z
+            );
+        }
+        else {
+            recomp_printf(
+                "[TORCH] FAILED to spawn torch #%d in scene %d\n",
+                (int)i,
+                play->sceneId
+            );
+        }
     }
 
     LastTorchType = torchType;
