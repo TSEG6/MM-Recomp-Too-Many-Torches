@@ -34,7 +34,9 @@ void randocheck() {
 static s16 LitTorchExceptionScenes[] = {
 
     SCENE_KAKUSIANA,    // Grottos
-    SCENE_MITURIN       // Woodfall Temple
+    SCENE_MITURIN,      // Woodfall Temple
+    SCENE_HAKUGIN,      // Snowhead Temple
+    SCENE_SEA           // Great Bay Temple
 
 }; // This is for indoor areas or temples.
 
@@ -152,6 +154,15 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_KAKUSIANA, 12, { 4071.0f, 0.0f, 1372.0f }, 0, 18216 },          // (Bean Seller)  Left Side Of Area To Pond
     { SCENE_KAKUSIANA, 12, { 4247.0f, 0.0f, 1800.0f }, 0, -30015 },         // (Bean Seller) Behind Light
     { SCENE_KAKUSIANA, 12, { 4356.0f, 0.0f, 1477.0f }, 0, -12210 },         // (Bean Seller) Right Side Of Area To Pond
+    { SCENE_KAKUSIANA, 13, { 5369.0f, -20.0f, 1173.0f }, 0, -32604 },       // (PeaHat) Right Side
+    { SCENE_KAKUSIANA, 13, { 5081.0f, -20.0f, 1184.0f }, 0, -32604 },       // (PeaHat) Left Side
+    { SCENE_KAKUSIANA, 9, { 1809.0f, 0.0f, 1562.0f }, 0, 0 },               // (Scrub) Behind Hole
+    { SCENE_KAKUSIANA, 9, { 1809.0f, -22.0f, 606.0f }, 0, 0 },              // (Scrub) Behind Scrub
+    { SCENE_KAKUSIANA, 14, { 6688.0f, -1.0f, 959.0f }, 0, 15889 },          // (SpringWater) Left
+    { SCENE_KAKUSIANA, 14, { 7364.0f, -1.0f, 954.0f }, 0, -16033 },         // (SpringWater) Right
+    { SCENE_KAKUSIANA, 14, { 7010.0f, -32.0f, 927.0f }, 0, -32594 },        // (SpringWater) Center
+    { SCENE_KAKUSIANA, 7, { 545.0f, 0.0f, 1402.0f }, 0, 17160 },            // (Dodongos) Left
+    { SCENE_KAKUSIANA, 7, { 736.0f, 0.0f, 1390.0f }, 0, -15744 },           // (Dodongos) Right
 
     // Road to Southern Swamp (8 Torches)
 
@@ -309,6 +320,7 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_CASTLE, -1, { -817.0f, 0.0f, -2297.0f }, 0, 0 },                // Bottom Left Corner
     { SCENE_CASTLE, -1, { 975.0f, 6.0f, -2566.0f }, 0, 0 },                 // Well
 
+
     // Woodfall Temple (27 Torches)
 
     { SCENE_MITURIN, 2, { 120.0f, -1185.0f, 2226.0f }, 0, 0 },              // Right Entrance Torch
@@ -338,6 +350,46 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_MITURIN, 0, { -732.0f, -1245.0f, -1258.0f }, 0, 16495 },        // Pre Boss Room Cubby Thing Left Stray Fairy
     { SCENE_MITURIN, 0, { 548.0f, -1365.0f, -950.0f }, 0, -26027 },         // Pre Boss Room Cubby Thing Most Right
     { SCENE_MITURIN, 0, { 0.0f, -1605.0f, -1676.0f }, 0, 0 },               // Pre Boss Room Middle Of Room
+
+    // Snowhead Temple (30 Torches)
+
+    { SCENE_HAKUGIN, 0, { 155.0f, 0.0f, 1185.0f }, 0, -25027 },             // Entrance Bottom Right
+    { SCENE_HAKUGIN, 0, { -155.0f, 0.0f, 1185.0f }, 0, -25027 },            // Entrance Bottom Left
+    { SCENE_HAKUGIN, 0, { -155.0f, 0.0f, 856.0f }, 0, 6672 },               // Entrance Top Left
+    { SCENE_HAKUGIN, 0, { 155.0f, 0.0f, 856.0f }, 0, -5797 },               // Entrance Top Right
+    { SCENE_HAKUGIN, 2, { 336.0f, 0.0f, 951.0f }, 0, 15858 },               // Ramp Room Next to Entrance Room Door
+    { SCENE_HAKUGIN, 2, { 688.0f, 0.0f, 1402.0f }, 0, -28683 },             // Ramp Room Bottom Right Corner
+    { SCENE_HAKUGIN, 2, { 1200.0f, -600.0f, 10.0f }, 0, 29939 },            // Ramp Room Below Stray Fairy
+    { SCENE_HAKUGIN, 9, { 924.0f, 360.0f, 332.0f }, 0, 0 },                 // Ice Eye Room With Spikes In Corner Below Spikes
+    { SCENE_HAKUGIN, 9, { 794.0f, 360.0f, -146.0f }, 0, 0 },                // Ice Eye Room With Spikes Next to Stray Fairy
+    { SCENE_HAKUGIN, 9, { 809.0f, 600.0f, 449.0f }, 0, 0 },                 // Ice Eye Room With Spikes Right Corner On Ledge
+    { SCENE_HAKUGIN, 9, { 1411.0f, 600.0f, 449.0f }, 0, 0 },                // Ice Eye Room With Spikes Left Corner On Ledge
+    { SCENE_HAKUGIN, 9, { 1079.0f, 840.0f, -343.0f }, 0, 0 },               // Ice Eye Room With Spikes Behind Stray Fairy Chest
+    { SCENE_HAKUGIN, 4, { -593.0f, 0.0f, -657.0f }, 0, 7626 },              // Main Room Switch Behind Bars First Floor Left
+    { SCENE_HAKUGIN, 4, { -658.0f, 0.0f, -596.0f }, 0, 8119 },              // Main Room Switch Behind Bars First Floor Right
+    { SCENE_HAKUGIN, 4, { -616.0f, -600.0f, -618.0f }, 0, 8057 },           // Main Room Switch Behind Bars Basement Between Pots
+    { SCENE_HAKUGIN, 4, { 565.0f, -600.0f, -346.0f }, 0, -10243 },          // Main Room Switch Basement Stairs Left (facing stairs)
+    { SCENE_HAKUGIN, 4, { 647.0f, -600.0f, -209.0f }, 0, -11346 },          // Main Room Switch Basement Stairs Left
+    { SCENE_HAKUGIN, 4, { 688.0f, 1800.0f, -689.0f }, 0, -16293 },          // Main Room Boss Key Door Right (facing chest)
+    { SCENE_HAKUGIN, 4, { 705.0f, 1800.0f, -525.0f }, 0, -16176 },          // Main Room Boss Key Door Left
+    { SCENE_HAKUGIN, 4, { 700.0f, 1800.0f, 79.0f }, 0, -16401 },            // Main Room Boss Key Platform Before Miniboss
+    { SCENE_HAKUGIN, 5, { -999.0f, -600.0f, -139.0f }, 0, -32611 },         // Jumps Room With Torches Basement Corner Near Door
+    { SCENE_HAKUGIN, 5, { -334.0f, -600.0f, -1321.0f }, 0, -23140 },        // Jumps Room With Torches Basement Corner Top Right
+    { SCENE_HAKUGIN, 8, { 152.0f, 600.0f, 797.0f }, 0, -364 },              // Room With Stray Fairy In Ceiling Corner Near Main Room Door
+    { SCENE_HAKUGIN, 8, { -166.0f, 480.0f, 1604.0f }, 0, -30073 },          // Room With Stray Fairy In Ceiling Corner In Snow
+    { SCENE_HAKUGIN, 8, { -769.0f, 600.0f, 1288.0f }, 0, 18960 },           // Room With Stray Fairy In Ceiling Corner Near Door With Pots
+    { SCENE_HAKUGIN, 3, { -1206.0f, 120.0f, 271.0f }, 0, 29411 },           // 2 Tall Block Pushing Room Left Ledge 
+    { SCENE_HAKUGIN, 3, { -900.0f, -6.0f, 574.0f }, 0, -32612 },            // 2 Tall Block Pushing Room Behind Key Chest
+    { SCENE_HAKUGIN, 7, { -1034.0f, 730.0f, 614.0f }, 0, 5877 },            // Room With Lots of Ice On Platforms and Hidden Stray Fairy Chest And Stairs
+    { SCENE_HAKUGIN, 11, { -958.0f, 1800.0f, -693.0f }, 0, -32612 },        // 2 Dynalfos Hallway Left Side From Stairs
+    { SCENE_HAKUGIN, 11, { -1141.0f, 1800.0f, 346.0f }, 0, -32490 },        // 2 Dynalfos Hallway Center End Of Room
+
+    // Great Bay Temple (2 Torches) (Only 2 because the place is already lit up by lights and torches wouldn't make sense)
+
+    { SCENE_SEA, 13, { 690.0f, -330.0f, 2728.0f }, 0, 0 },                  // Entrance Right Corner Below Left
+    { SCENE_SEA, 13, { -690.0f, -330.0f, 2728.0f }, 0, 0 },                 // Entrance Right Corner Below Right
+
+    // No Stone Tower Temple nobody lives there and light isn't liked there.
 
 };
 
