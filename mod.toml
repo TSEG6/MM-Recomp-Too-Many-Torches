@@ -8,14 +8,14 @@
 id = "mm_recomp_torches"
 
 # Version of this mod.
-version = "0.2.0"
+version = "0.6.0"
 
 # The name that will show up for this mod in the mod menu. This should be human readable.
 display_name = "Too Many Torches"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
 description =  """
-The torch god was unpleased with the lack of torches in this game.
+The torch god was displeased with the lack of torches in this game.
 This mod adds many more to the world."""
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
@@ -63,5 +63,5 @@ func_reference_syms_file = "Zelda64RecompSyms/mm.us.rev1.syms.toml"
 data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml" ]
 
 # Additional files to include in the mod.
-additional_files = [ ]
+additional_files = ["thumb.png"]
 
