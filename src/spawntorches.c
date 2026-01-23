@@ -183,12 +183,12 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_20SICHITAI, -1, { -122.0f, 20.0f, -111.0f }, 0, -32340 },       // Dock Right
     { SCENE_20SICHITAI, -1, { -311.0f, 170.0f, 33.0f }, 0, 16387 },         // Tourist Center Across Scrub
     { SCENE_20SICHITAI, -1, { 2089.0f, 22.0f, 244.0f }, 0, -32768 },        // Before Path to Potion Shop Right
-    { SCENE_20SICHITAI, -1, { 3467.0f, 15.0f, -813.0f }, 0, 25225 },        // Left Side Ladder
-    { SCENE_20SICHITAI, -1, { 3807.0f, 15.0f, -746.0f }, 0, 3236 },         // Right Side Ladder
-    { SCENE_20SICHITAI, -1, { 3982.0f, 23.0f, -1722.0f }, 0, -5835 },       // Next to Woods of Mystery
-    { SCENE_20SICHITAI, -1, { -767.0f, 36.0f, 4143.0f }, 0, 24983 },        // Deku Palace Entrance Left
-    { SCENE_20SICHITAI, -1, { -930.0f, 35.8f, 4001.0f }, 0, 24983 },        // Deku Palace Entrance Right
-    { SCENE_20SICHITAI, -1, { 311.0f, 393.0f, 3241.0f }, 0, -6788 },        // Entrance to Woodfall
+    { SCENE_20SICHITAI, 2, { 3467.0f, 15.0f, -813.0f }, 0, 25225 },         // Left Side Ladder
+    { SCENE_20SICHITAI, 2, { 3807.0f, 15.0f, -746.0f }, 0, 3236 },          // Right Side Ladder
+    { SCENE_20SICHITAI, 2, { 3982.0f, 23.0f, -1722.0f }, 0, -5835 },        // Next to Woods of Mystery
+    { SCENE_20SICHITAI, 1, { -767.0f, 36.0f, 4143.0f }, 0, 24983 },         // Deku Palace Entrance Left
+    { SCENE_20SICHITAI, 1, { -930.0f, 35.8f, 4001.0f }, 0, 24983 },         // Deku Palace Entrance Right
+    { SCENE_20SICHITAI, 1, { 311.0f, 393.0f, 3241.0f }, 0, -6788 },         // Entrance to Woodfall
 
     // Southern Swamp Clear (12 Torches)
 
@@ -198,12 +198,12 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_20SICHITAI2, -1, { -122.0f, 20.0f, -111.0f }, 0, -32340 },       // Dock Right
     { SCENE_20SICHITAI2, -1, { -311.0f, 170.0f, 33.0f }, 0, 16387 },         // Tourist Center Across Scrub
     { SCENE_20SICHITAI2, -1, { 2089.0f, 22.0f, 244.0f }, 0, -32768 },        // Before Path to Potion Shop Right
-    { SCENE_20SICHITAI2, -1, { 3467.0f, 15.0f, -813.0f }, 0, 25225 },        // Left Side Ladder
-    { SCENE_20SICHITAI2, -1, { 3807.0f, 15.0f, -746.0f }, 0, 3236 },         // Right Side Ladder
-    { SCENE_20SICHITAI2, -1, { 3982.0f, 23.0f, -1722.0f }, 0, -5835 },       // Next to Woods of Mystery
-    { SCENE_20SICHITAI2, -1, { -767.0f, 36.0f, 4143.0f }, 0, 24983 },        // Deku Palace Entrance Left
-    { SCENE_20SICHITAI2, -1, { -930.0f, 35.8f, 4001.0f }, 0, 24983 },        // Deku Palace Entrance Right
-    { SCENE_20SICHITAI2, -1, { 311.0f, 393.0f, 3241.0f }, 0, -6788 },        // Entrance to Woodfall
+    { SCENE_20SICHITAI2, 2, { 3467.0f, 15.0f, -813.0f }, 0, 25225 },         // Left Side Ladder
+    { SCENE_20SICHITAI2, 2, { 3807.0f, 15.0f, -746.0f }, 0, 3236 },          // Right Side Ladder
+    { SCENE_20SICHITAI2, 2, { 3982.0f, 23.0f, -1722.0f }, 0, -5835 },        // Next to Woods of Mystery
+    { SCENE_20SICHITAI2, 1, { -767.0f, 36.0f, 4143.0f }, 0, 24983 },         // Deku Palace Entrance Left
+    { SCENE_20SICHITAI2, 1, { -930.0f, 35.8f, 4001.0f }, 0, 24983 },         // Deku Palace Entrance Right
+    { SCENE_20SICHITAI2, 1, { 311.0f, 393.0f, 3241.0f }, 0, -6788 },         // Entrance to Woodfall
 
     // Woods of Mystery (9 Torches)
 
@@ -389,7 +389,46 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_SEA, 13, { 690.0f, -330.0f, 2728.0f }, 0, 0 },                  // Entrance Right Corner Below Left
     { SCENE_SEA, 13, { -690.0f, -330.0f, 2728.0f }, 0, 0 },                 // Entrance Right Corner Below Right
 
-    // No Stone Tower Temple nobody lives there and light isn't liked there.
+    // No Stone Tower Temple nobody lives there and light isn't liked there. (0 Torches)
+
+    // Zora Hall (9 Torches)
+
+    { SCENE_33ZORACITY, 0, { -1208.0f, 178.0f, 1036.0f }, 0, 24476 },       // Entrance Left (Main)
+    { SCENE_33ZORACITY, 0, { -1038.0f, 178.0f, 1207.0f }, 0, 24476 },       // Entrance Right (Main)
+    { SCENE_33ZORACITY, 0, { 0.0f, 0.0f, 940.0f }, 0, 0 },                  // Corner Behind Sitting Zora
+    { SCENE_33ZORACITY, 0, { 937.0f, 0.0f, 0.0f }, 0, -16790 },             // Corner Left Of Giant Clam
+    { SCENE_33ZORACITY, 0, { 471.0f, 0.0f, 814.0f }, 0, -27691 },           // Right Side of Previous Torch
+    { SCENE_33ZORACITY, 0, { 1120.0f, 0.0f, 767.0f }, 0, -23828 },          // Left Side Shop Door (looking at door)
+    { SCENE_33ZORACITY, 0, { 471.0f, 0.0f, -814.0f }, 0, -5220 },           // Behind Waterfall
+    { SCENE_33ZORACITY, 0, { 0.0f, 0.0f, -941.0f }, 0, 0 },                 // Behind Waterfall Corner Directly Behind Clam
+    { SCENE_33ZORACITY, 0, { -466.0f, 0.0f, -812.0f }, 0, 6573 },           // Behind Waterfall Near Zora Trying to Get Into Room
+
+    // Deku Playground (3 Torches)
+
+    { SCENE_DEKUTES, 0, { 128.0f, 40.0f, -529.0f }, 0, 0 },                 // Platform Across Room Right
+    { SCENE_DEKUTES, 0, { -128.0f, 40.0f, -529.0f }, 0, 0 },                // Platform Across Room Left
+    { SCENE_DEKUTES, 0, { 0.0f, 40.0f, -661.0f }, 0, 0 },                   // Platform Across Room Middle
+
+    // Swamp Spider House (18 Torches)
+
+    { SCENE_KINSTA1, 0, { 101.0f, 120.0f, -69.0f }, 0, 0 },                 // Entrance Door Right
+    { SCENE_KINSTA1, 1, { 323.0f, 0.0f, -217.0f }, 0, 0 },                  // Main Room Bottom Right
+    { SCENE_KINSTA1, 1, { -323.0f, 0.0f, -217.0f }, 0, 0 },                 // Main Room Bottom Left
+    { SCENE_KINSTA1, 1, { -323.0f, 0.0f, -1160.0f }, 0, 0 },                // Main Room Top Left
+    { SCENE_KINSTA1, 1, { 323.0f, 0.0f, -1160.0f }, 0, 0 },                 // Main Room Top Right
+    { SCENE_KINSTA1, 1, { 0.0f, -20.0f, -833.0f }, 0, 0 },                  // Main Room Middle In Water
+    { SCENE_KINSTA1, 1, { 215.0f, 300.0f, -1142.0f }, 0, 0 },               // Main Room Top Right Near Corner
+    { SCENE_KINSTA1, 1, { -215.0f, 300.0f, -1142.0f }, 0, 0 },              // Main Room Top Left Near Corner
+    { SCENE_KINSTA1, 2, { -90.0f, 0.0f, -1468.0f }, 0, 0 },                 // Ladder Room Before Tree Left Bottom Floor
+    { SCENE_KINSTA1, 2, { 90.0f, 0.0f, -1468.0f }, 0, 0 },                  // Ladder Room Before Tree Right Bottom Floor
+    { SCENE_KINSTA1, 2, { -226.0f, 180.0f, -1529.0f }, 0, 0 },              // Ladder Room Before Tree Left Behind Pillar Near Boxes And Bean Hole
+    { SCENE_KINSTA1, 2, { 226.0f, 180.0f, -1529.0f }, 0, 0 },               // Ladder Room Before Tree Left Behind Pillar Near Pots And Switch
+    { SCENE_KINSTA1, 4, { 750.0f, 180.0f, -1228.0f }, 0, 0 },               // Sleeping Deku Scrub Room Ledge Above
+    { SCENE_KINSTA1, 4, { 450.0f, 180.0f, -1466.0f }, 0, 0 },               // Sleeping Deku Scrub Room Above Near Door
+    { SCENE_KINSTA1, 4, { 756.0f, 0.0f, -1175.0f }, 0, 0 },                 // Sleeping Deku Scrub Room Near Covered Tunnel
+    { SCENE_KINSTA1, 4, { 515.0f, 0.0f, -500.0f }, 0, 0 },                  // Sleeping Deku Scrub Room Behind Pots
+    { SCENE_KINSTA1, 3, { -438.0f, 0.0f, -201.0f }, 0, 0 },                 // Slope In Middle Room With Ladder Near Ladder
+    { SCENE_KINSTA1, 3, { -438.0f, 300.0f, -118.0f }, 0, 0 },               // Slope In Middle Room With Ladder Above Ladder In Corner
 
 };
 
