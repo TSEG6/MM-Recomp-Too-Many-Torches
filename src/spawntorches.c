@@ -545,15 +545,15 @@ static void PrintPlayerPosition(PlayState* play) {
     if (!player) return;
 
     if ((play->gameplayFrames % TORCH_PRINT_INTERVAL) == 0) {
-        recomp_printf(
-            "[POS] Scene %d | Room %d | X %.2f Y %.2f Z %.2f | RotY %d\n",
-            play->sceneId,
-            play->roomCtx.curRoom.num,
-            player->actor.world.pos.x,
-            player->actor.world.pos.y,
-            player->actor.world.pos.z,
-            player->actor.world.rot.y
-        );
+        // recomp_printf(
+        // "[POS] Scene %d | Room %d | X %.2f Y %.2f Z %.2f | RotY %d\n",
+        //  play->sceneId,
+        //  play->roomCtx.curRoom.num,
+        //   player->actor.world.pos.x,
+        //   player->actor.world.pos.y,
+        //  player->actor.world.pos.z,
+        //  player->actor.world.rot.y
+        //);
     }
 }
 
