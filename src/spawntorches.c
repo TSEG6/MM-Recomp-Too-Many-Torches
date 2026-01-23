@@ -147,7 +147,7 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_F01C, -1, { -5462.0f, 132.0f, -954.0f }, 0, 28377 },            // Top Left  
     { SCENE_F01C, -1, { 4814.0f, 132.0f, -1504.0f }, 0, 12843 },            // Right Side
 
-    // Grottos (5 Torches)
+    // Grottos (14 Torches)
 
     { SCENE_KAKUSIANA, 12, { 4372.0f, 0.0f, 1131.0f }, 0, -17255 },         // (Bean Seller)  Pond Right
     { SCENE_KAKUSIANA, 12, { 4126.0f, 0.0f, 877.0f }, 0, 2844 },            // (Bean Seller)  Pond Left
