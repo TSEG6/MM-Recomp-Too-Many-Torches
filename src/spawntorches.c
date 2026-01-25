@@ -1,4 +1,4 @@
-#include "modding.h"
+﻿#include "modding.h"
 #include "global.h"
 #include "z64actor.h"
 #include "recomputils.h"
@@ -94,7 +94,7 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_ALLEY, -1, { -1679.0f, -120.0f, 382.0f }, 0, 0 },               // Near Exit
     { SCENE_ALLEY, -1, { -1948.0f, -120.0f, 359.0f }, 0, 0 },               // Near River
 
-    // Termina Field (13 Torches)
+    // Termina Field (8 Torches)
 
     { SCENE_00KEIKOKU, -1, { -527.0f, -77.0f, 1665.0f }, 0, 0 },            // SCT Left
     { SCENE_00KEIKOKU, -1, { -271.0f, -77.0f, 1665.0f }, 0, 0 },            // SCT Right
@@ -104,11 +104,6 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_00KEIKOKU, -1, { -622.0f, 48.0f, -2418.0f }, 0, 0 },            // NCT Right
     { SCENE_00KEIKOKU, -1, { -2417.0f, 48.0f, -626.0f }, 0, 0 },            // WCT Left
     { SCENE_00KEIKOKU, -1, { -2417.0f, 48.0f, -187.0f }, 0, 0 },            // WCT Right
-    { SCENE_00KEIKOKU, -1, { 4505.0f, 254.0f, 1095.0f }, 0, 0 },            // Observatory
-    { SCENE_00KEIKOKU, -1, { -3328.0f, -222.0f, 4188.0f }, 0, -13466 },     // Milk Road Right
-    { SCENE_00KEIKOKU, -1, { -3236.0f, -222.0f, 4565.0f }, 0, -12129 },     // Milk Road Left
-    { SCENE_00KEIKOKU, -1, { -3644.0f, 48.0f, -147.0f }, 0, 0 },            // Fountain Left
-    { SCENE_00KEIKOKU, -1, { -3644.0f, 48.0f, -663.0f }, 0, 0 },            // Fountain Right
 
     // Milk Road (2 Torches)
 
