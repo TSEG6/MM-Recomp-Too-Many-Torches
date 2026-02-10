@@ -218,7 +218,7 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_22DEKUCITY, -1, { -105.0f, 0.0f, 3214.0f }, 0, 0 },             // Entrance Right
     { SCENE_22DEKUCITY, -1, { -92.0f, 0.0f, 2028.0f }, 0, 0 },              // Path Right (facing chambers)
     { SCENE_22DEKUCITY, -1, { 92.0f, 0.0f, 2028.0f }, 0, 0 },               // Path Left (facing chambers)
-    { SCENE_22DEKUCITY, -1, { -4.0f, 100.0f, 1395.0f }, 0, 0 },             // Above Chambers Door
+    { SCENE_22DEKUCITY, -1, { 5.0f, 100.0f, 1395.0f }, 0, 0 },             // Above Chambers Door
     { SCENE_22DEKUCITY, -1, { 1620.0f, 0.0f, 666.0f }, 0, 0 },              // Near Bean Hole Left
     { SCENE_22DEKUCITY, -1, { 1943.0f, 0.0f, 1247.0f }, 0, 0 },             // Near Bean Hole Near Water
     { SCENE_22DEKUCITY, -1, { 599.0f, 25.0f, 2855.0f }, 0, -27774 },        // Near Deku Flower Path to Swamp Flowers
