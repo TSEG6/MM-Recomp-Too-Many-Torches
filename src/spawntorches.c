@@ -6,6 +6,7 @@
 
 #define TORCH_PRINT_INTERVAL 60
 bool SwapDayNightTorches = true; // Bool toggle for night torch activation for other mods if needed (currently changed by rando)
+#define TORCH_CULL_DIST_SQ (4000.0f * 4000.0f)  // Distance torches will spawn in (fixes a bug with collision)
 
 typedef struct {
     s16 sceneId;
@@ -23,20 +24,20 @@ void randocheck() {
     RandoLoaded = recomp_is_dependency_met("mm_recomp_rando") == DEPENDENCY_STATUS_FOUND;
 
     if (RandoLoaded) {
-
         SwapDayNightTorches = false;
-
     }
-
 }
 
 
 static s16 LitTorchExceptionScenes[] = {
 
     SCENE_KAKUSIANA,    // Grottos
+    SCENE_DEKUTES,      // Deku Playground
+    SCENE_KINSTA1,      // Swamp Spider House
     SCENE_MITURIN,      // Woodfall Temple
     SCENE_HAKUGIN,      // Snowhead Temple
-    SCENE_SEA           // Great Bay Temple
+    SCENE_SEA,          // Great Bay Temple
+    SCENE_33ZORACITY    // Zora Hall
 
 }; // This is for indoor areas or temples.
 
@@ -104,6 +105,11 @@ static TorchSpawn sTorchSpawns[] = {
     { SCENE_00KEIKOKU, -1, { -622.0f, 48.0f, -2418.0f }, 0, 0 },            // NCT Right
     { SCENE_00KEIKOKU, -1, { -2417.0f, 48.0f, -626.0f }, 0, 0 },            // WCT Left
     { SCENE_00KEIKOKU, -1, { -2417.0f, 48.0f, -187.0f }, 0, 0 },            // WCT Right
+    { SCENE_00KEIKOKU, -1, { 4505.0f, 254.0f, 1095.0f }, 0, 0 },            // Observatory
+    { SCENE_00KEIKOKU, -1, { -3328.0f, -222.0f, 4188.0f }, 0, -13466 },     // Milk Road Right
+    { SCENE_00KEIKOKU, -1, { -3236.0f, -222.0f, 4565.0f }, 0, -12129 },     // Milk Road Left
+    { SCENE_00KEIKOKU, -1, { -3644.0f, 48.0f, -147.0f }, 0, 0 },            // Fountain Left
+    { SCENE_00KEIKOKU, -1, { -3644.0f, 48.0f, -663.0f }, 0, 0 },            // Fountain Right
 
     // Milk Road (2 Torches)
 
@@ -482,30 +488,22 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
         torchType = SwapDayNightTorches ? (10 << 10) : (8 << 10);
     }
 
-    Actor* actor = play->actorCtx.actorLists[ACTORCAT_PROP].first;
-    bool foundTorch = false;
-
-    while (actor != NULL) {
-        if (actor->id == ACTOR_OBJ_SYOKUDAI) {
-            foundTorch = true;
-            break;
-        }
-        actor = actor->next;
-    }
-
-    if (foundTorch && LastTorchType == torchType) {
-        return;
-    }
-
-    if (foundTorch && LastTorchType != 0 && LastTorchType != torchType) {
-        actor = play->actorCtx.actorLists[ACTORCAT_PROP].first;
+    if (LastTorchType != 0 && LastTorchType != torchType) {
+        Actor* actor = play->actorCtx.actorLists[ACTORCAT_PROP].first;
         while (actor != NULL) {
             Actor* next = actor->next;
-            if (actor->id == ACTOR_OBJ_SYOKUDAI) {
+            if (actor->id == ACTOR_OBJ_SYOKUDAI && actor->textId == 0x1337) {
                 Actor_Kill(actor);
             }
             actor = next;
         }
+    }
+
+    LastTorchType = torchType;
+    Actor* player = play->actorCtx.actorLists[ACTORCAT_PLAYER].first;
+
+    if (player == NULL) {
+        return;
     }
 
     for (size_t i = 0; i < TORCH_SPAWN_COUNT; i++) {
@@ -516,21 +514,47 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
             sTorchSpawns[i].roomNum != play->roomCtx.curRoom.num)
             continue;
 
-        Actor_Spawn(
-            &play->actorCtx,
-            play,
-            ACTOR_OBJ_SYOKUDAI,
-            sTorchSpawns[i].pos.x,
-            sTorchSpawns[i].pos.y,
-            sTorchSpawns[i].pos.z,
-            sTorchSpawns[i].rotX,
-            sTorchSpawns[i].rotY,
-            0,
-            torchType | (i & 0x3FF)
-        );
-    }
+        float dx = sTorchSpawns[i].pos.x - player->world.pos.x;
+        float dy = sTorchSpawns[i].pos.y - player->world.pos.y;
+        float dz = sTorchSpawns[i].pos.z - player->world.pos.z;
+        float distSq = (dx * dx) + (dy * dy) + (dz * dz);
 
-    LastTorchType = torchType;
+        bool shouldBeActive = distSq <= TORCH_CULL_DIST_SQ;
+        bool isSpawned = false;
+        Actor* activeTorch = NULL;
+
+        Actor* actor = play->actorCtx.actorLists[ACTORCAT_PROP].first;
+        while (actor != NULL) {
+            if (actor->id == ACTOR_OBJ_SYOKUDAI && actor->textId == 0x1337 && actor->params == (torchType | (i & 0x3FF))) {
+                isSpawned = true;
+                activeTorch = actor;
+                break;
+            }
+            actor = actor->next;
+        }
+
+        if (shouldBeActive && !isSpawned) {
+            Actor* spawnedTorch = Actor_Spawn(
+                &play->actorCtx,
+                play,
+                ACTOR_OBJ_SYOKUDAI,
+                sTorchSpawns[i].pos.x,
+                sTorchSpawns[i].pos.y,
+                sTorchSpawns[i].pos.z,
+                sTorchSpawns[i].rotX,
+                sTorchSpawns[i].rotY,
+                0,
+                torchType | (i & 0x3FF)
+            );
+
+            if (spawnedTorch != NULL) {
+                spawnedTorch->textId = 0x1337;
+            }
+        }
+        else if (!shouldBeActive && isSpawned) {
+            Actor_Kill(activeTorch);
+        }
+    }
 }
 
 // Debug Player Printing
@@ -558,7 +582,6 @@ RECOMP_HOOK("Play_Update")
 void TorchSpawner_PlayUpdateHook(PlayState* play) {
     static s16 lastScene = -1;
     static s16 lastRoom = -1;
-    static u16 lastDayTime = 0;
 
     if (lastScene != play->sceneId) {
         TorchesSpawned = false;
@@ -571,12 +594,6 @@ void TorchSpawner_PlayUpdateHook(PlayState* play) {
         LastTorchType = 0;
         lastRoom = play->roomCtx.curRoom.num;
     }
-
-    if (gSaveContext.save.time < lastDayTime) {
-        TorchesSpawned = false;
-        LastTorchType = 0;
-    }
-    lastDayTime = gSaveContext.save.time;
 
     SpawnTorchesIfNeeded(play);
     PrintPlayerPosition(play);
