@@ -2,11 +2,12 @@
 #include "global.h"
 #include "z64actor.h"
 #include "recomputils.h"
+#include "z64recomp_api.h"
 #include "globalobjects_api.h"
 
 #define TORCH_PRINT_INTERVAL 60
 bool SwapDayNightTorches = true; // Bool toggle for night torch activation for other mods if needed (currently changed by rando)
-#define TORCH_CULL_DIST_SQ (4000.0f * 4000.0f)  // Distance torches will spawn in (fixes a bug with collision)
+#define TORCH_CULL_DIST_SQ (4000.0f * 4000.0f)  // Distance torches will spawn in
 
 typedef struct {
     s16 sceneId;
@@ -16,7 +17,35 @@ typedef struct {
     s16 rotY;
 } TorchSpawn;
 
-int RandoLoaded;              
+int RandoLoaded;
+
+static ActorExtensionId sTorchModCustomIdExtensionId;
+
+RECOMP_CALLBACK("*", recomp_on_init) void TorchMod_OnRecompInit(void) {
+    sTorchModCustomIdExtensionId = z64recomp_extend_actor_all(sizeof(s16));
+}
+
+RECOMP_EXPORT s16 TorchMod_GetCustomId(Actor* actor) {
+    s16* customId;
+
+    if (actor == NULL) {
+        return 0;
+    }
+
+    customId = z64recomp_get_extended_actor_data(actor, sTorchModCustomIdExtensionId);
+    return *customId;
+}
+
+static void SetTorchModCustomId(Actor* actor, s16 customId) {
+    s16* actorCustomId;
+
+    if (actor == NULL) {
+        return;
+    }
+
+    actorCustomId = z64recomp_get_extended_actor_data(actor, sTorchModCustomIdExtensionId);
+    *actorCustomId = customId;
+}
 
 RECOMP_HOOK("Play_Init") // Rando Optional Dependency (eventually use torch sanity stuff) (I'll probably forget)
 void randocheck() {
@@ -492,7 +521,8 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
         Actor* actor = play->actorCtx.actorLists[ACTORCAT_PROP].first;
         while (actor != NULL) {
             Actor* next = actor->next;
-            if (actor->id == ACTOR_OBJ_SYOKUDAI && actor->textId == 0x1337) {
+            if (actor->id == ACTOR_OBJ_SYOKUDAI &&
+                TorchMod_GetCustomId(actor) != 0) {
                 Actor_Kill(actor);
             }
             actor = next;
@@ -525,7 +555,8 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
 
         Actor* actor = play->actorCtx.actorLists[ACTORCAT_PROP].first;
         while (actor != NULL) {
-            if (actor->id == ACTOR_OBJ_SYOKUDAI && actor->textId == 0x1337 && actor->params == (torchType | (i & 0x3FF))) {
+            if (actor->id == ACTOR_OBJ_SYOKUDAI &&
+                TorchMod_GetCustomId(actor) == (s16)(i + 1)) {
                 isSpawned = true;
                 activeTorch = actor;
                 break;
@@ -544,11 +575,11 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
                 sTorchSpawns[i].rotX,
                 sTorchSpawns[i].rotY,
                 0,
-                torchType | (i & 0x3FF)
+                torchType
             );
 
             if (spawnedTorch != NULL) {
-                spawnedTorch->textId = 0x1337;
+                SetTorchModCustomId(spawnedTorch, (s16)(i + 1));
             }
         }
         else if (!shouldBeActive && isSpawned) {
