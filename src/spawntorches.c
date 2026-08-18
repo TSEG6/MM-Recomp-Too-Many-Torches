@@ -19,31 +19,31 @@ typedef struct {
 
 int RandoLoaded;
 
-static ActorExtensionId sTorchModCustomIdExtensionId;
+static ActorExtensionId sTorchModExtensionId;
 
 RECOMP_CALLBACK("*", recomp_on_init) void TorchMod_OnRecompInit(void) {
-    sTorchModCustomIdExtensionId = z64recomp_extend_actor_all(sizeof(s16));
+    sTorchModExtensionId = z64recomp_extend_actor_all(sizeof(s16));
 }
 
-RECOMP_EXPORT s16 TorchMod_GetCustomId(Actor* actor) {
+RECOMP_EXPORT s16 TorchMod_GetTorchId(Actor* actor) {
     s16* customId;
 
     if (actor == NULL) {
         return 0;
     }
 
-    customId = z64recomp_get_extended_actor_data(actor, sTorchModCustomIdExtensionId);
+    customId = z64recomp_get_extended_actor_data(actor, sTorchModExtensionId);
     return *customId;
 }
 
-static void SetTorchModCustomId(Actor* actor, s16 customId) {
+static void SetTorchModTorchId(Actor* actor, s16 customId) {
     s16* actorCustomId;
 
     if (actor == NULL) {
         return;
     }
 
-    actorCustomId = z64recomp_get_extended_actor_data(actor, sTorchModCustomIdExtensionId);
+    actorCustomId = z64recomp_get_extended_actor_data(actor, sTorchModExtensionId);
     *actorCustomId = customId;
 }
 
@@ -522,7 +522,7 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
         while (actor != NULL) {
             Actor* next = actor->next;
             if (actor->id == ACTOR_OBJ_SYOKUDAI &&
-                TorchMod_GetCustomId(actor) != 0) {
+                TorchMod_GetTorchId(actor) != 0) {
                 Actor_Kill(actor);
             }
             actor = next;
@@ -556,7 +556,7 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
         Actor* actor = play->actorCtx.actorLists[ACTORCAT_PROP].first;
         while (actor != NULL) {
             if (actor->id == ACTOR_OBJ_SYOKUDAI &&
-                TorchMod_GetCustomId(actor) == (s16)(i + 1)) {
+                TorchMod_GetTorchId(actor) == (s16)(i + 1)) {
                 isSpawned = true;
                 activeTorch = actor;
                 break;
@@ -579,7 +579,7 @@ static void SpawnTorchesIfNeeded(PlayState* play) {
             );
 
             if (spawnedTorch != NULL) {
-                SetTorchModCustomId(spawnedTorch, (s16)(i + 1));
+                SetTorchModTorchId(spawnedTorch, (s16)(i + 1));
             }
         }
         else if (!shouldBeActive && isSpawned) {
